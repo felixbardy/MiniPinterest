@@ -1,5 +1,8 @@
 <?php
-
+  session_start();
+  require_once("./func/bd.php");
+  require_once("./func/bd_images.php");
+  $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
 ?>
 
 <!doctype html>
