@@ -13,10 +13,17 @@ function generatePageHeader($place)
   $header .= "    </li>\n";
 
   $header .= "    <li class=\"nav-item";
+  if ($place == "Inscription") $header .= " active";
+  $header .= "\">\n";
+  $header .= "      <a class=\"nav-link\" href=\"./inscription.php\">Inscription</a>\n";
+  $header .= "    </li>\n";
+
+  $header .= "    <li class=\"nav-item";
   if ($place == "Connection") $header .= " active";
   $header .= "\">\n";
-  $header .= "      <a class=\"nav-link\" href=\"./connection.php\">Connection</a>\n";
+  $header .= "      <a class=\"nav-link\" href=\"./connexion.php\">Connexion</a>\n";
   $header .= "    </li>\n";
+
   $header .= "  </ul>\n";
   $header .= "</nav>\n";
 
