@@ -36,7 +36,7 @@
     <br>
     <?php
         //On récupère les images à afficher
-        if (is_null($_GET["category"]) || $_GET["category"] == "all")
+        if (!array_key_exists("category", $_GET) || $_GET["category"] == "all")
           $images = getAllImages($_SESSION["connection"]);
         else
           $images = getImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
