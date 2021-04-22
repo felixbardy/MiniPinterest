@@ -10,7 +10,10 @@
     <head>
         <meta charset="utf-8">
         <title>Projet BDW1 2021</title>
+        <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
+
+        <script src="./bootstrap/bootstrap.min.js"></script>
     </head>
     <body>
     <form name="select_category" action="" method="GET">
