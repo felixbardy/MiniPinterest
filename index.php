@@ -2,6 +2,7 @@
   session_start();
   require_once("./func/bd.php");
   require_once("./func/bd_images.php");
+  require_once("./func/interface_generation.php");
   $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
 ?>
 
@@ -16,6 +17,9 @@
         <script src="./bootstrap/bootstrap.min.js"></script>
     </head>
     <body>
+    <?php 
+    echo generatePageHeader("Home");
+    ?>
     <form name="select_category" action="" method="GET">
       <select name="category" id="category">
         <option value="all">Toutes les photos</option>
@@ -41,10 +45,7 @@
         else
           $images = getImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
         
-        foreach($images as $image)
-        {
-            echo $image["nomFich"] . "<br>";
-        }
+        echo generateImageGallery($images);
 
     ?>
     </body>
