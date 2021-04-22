@@ -33,4 +33,26 @@ function generateImageGallery($images)
     $gallery .= "</div>\n";
     return $gallery;
 }
+
+function generateImageDetails($photo, $category)
+{
+  $table = "<table class=\"table\">\n"
+         . "  <tr>\n"
+         . "    <th>Description</th>\n"
+         . "    <td>" . $photo["description"] . "</td>\n"
+         . "  </tr>\n"
+         . "  <tr>\n"
+         . "    <th>Nom du fichier</th>\n"
+         . "    <td>" . $photo["nomFich"] . "</td>\n"
+         . "  </tr>\n"
+         . "  <tr>\n"
+         . "    <th>Catégorie</th>\n"
+         . "    <td><a href=\"./index.php?category=" . strval($category["catId"]) . "\">" . $category["nomCat"] . "</a></td>\n"
+         . "  </tr>\n"
+         . "</table>\n";
+  
+  return $table;
+  
+}
+
 ?>
