@@ -9,12 +9,18 @@ function getAllCategories($link)
 
 function getAllImages($link)
 {
-    return executeQuery($link, "SELECT * FROM Photo");
+    return mysqli_fetch_all(
+        executeQuery($link, "SELECT * FROM Photo"),
+        MYSQLI_ASSOC
+    );
 }
 
 function getImagesFromCategoryID($link, $catId)
 {
-    return executeQuery($link, "SELECT * FROM Photo WHERE catId=$catId");
+    return mysqli_fetch_all(
+        executeQuery($link, "SELECT * FROM Photo WHERE catId=$catId"),
+        MYSQLI_ASSOC
+    );
 }
 
 function getImageByID($link, $id)
