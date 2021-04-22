@@ -9,7 +9,7 @@ function generatePageHeader($place)
   $header .= "    <li class=\"nav-item";
   if ($place == "Home") $header .= " active";
   $header .= "\">\n";
-  $header .= "      <a class=\"nav-link\" href=\"./index.php\">Acceuil</a>\n";
+  $header .= "      <a class=\"nav-link\" href=\"./index.php\">Accueil</a>\n";
   $header .= "    </li>\n";
 
   $header .= "    <li class=\"nav-item";
@@ -19,7 +19,7 @@ function generatePageHeader($place)
   $header .= "    </li>\n";
 
   $header .= "    <li class=\"nav-item";
-  if ($place == "Connection") $header .= " active";
+  if ($place == "Connexion") $header .= " active";
   $header .= "\">\n";
   $header .= "      <a class=\"nav-link\" href=\"./connexion.php\">Connexion</a>\n";
   $header .= "    </li>\n";
