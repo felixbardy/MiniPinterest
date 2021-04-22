@@ -30,5 +30,19 @@
       </select>
       <input type="submit" value="Filtrer">
     </form>
+    <br>
+    <?php
+        //On récupère les images à afficher
+        if (is_null($_GET["category"]) || $_GET["category"] == "all")
+          $images = getAllImages($_SESSION["connection"]);
+        else
+          $images = getImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
+        
+        foreach($images as $image)
+        {
+            echo $image["nomFich"] . "<br>";
+        }
+
+    ?>
     </body>
 </html>
