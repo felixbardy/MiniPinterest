@@ -4,7 +4,10 @@ require_once("./func/bd.php");
 
 function getAllCategories($link)
 {
-    return executeQuery($link, "SELECT * FROM Categorie");
+    return mysqli_fetch_all(
+        executeQuery($link, "SELECT * FROM Categorie"),
+        MYSQLI_ASSOC
+    );
 }
 
 function getAllImages($link)
@@ -25,8 +28,7 @@ function getImagesFromCategoryID($link, $catId)
 
 function getImageByID($link, $id)
 {
-    $result = executeQuery($link, "SELECT * FROM Photo WHERE photoId=$id");
-    return $result;
+    return mysqli_fetch_assoc(executeQuery($link, "SELECT * FROM Photo WHERE photoId=$id"));
 }
 
 function getCategoryByID($link, $id)
