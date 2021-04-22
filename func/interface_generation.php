@@ -25,12 +25,12 @@ function generatePageHeader($place)
 
 function generateImageGallery($images)
 {
-    $gallery = "";
+    $gallery = '';
     $number_of_images = count($images);
-    foreach($images as $image)
-    {
-      $gallery .= "<a href='./photo_details.php?photoId=" . strval($image["photoId"]) . "'><img src='img/" . $image["nomFich"] . "'></a><br>";
-    }
+    $gallery .= "<div class=\"col-md-6 col-sm-9 col-xs-12\">";
+    foreach($images as $index => $image)
+      $gallery .= "<a href='./photo_details.php?photoId=" . strval($image["photoId"]) . "'><img class=\"img-responsive\" width=\"33%\" src='img/" . $image["nomFich"] . "'></a>\n";
+    $gallery .= "</div>\n";
     return $gallery;
 }
 ?>
