@@ -29,12 +29,10 @@ function getImageByID($link, $id)
     return $result;
 }
 
-function getCategoryNameByID($link, $id)
+function getCategoryByID($link, $id)
 {
-    $result = executeQuery($link, "SELECT nomCat FROM Categorie WHERE catId=$id");
-    foreach($result as $key => $category)
-      foreach($category as $key => $value)
-          return $value;
+    return mysqli_fetch_assoc(executeQuery($link, "SELECT * FROM Categorie WHERE catId=$id"));
+    
 }
 
 ?>
