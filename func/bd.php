@@ -29,13 +29,7 @@ function executeQuery($link, $query)
 
 	$result = mysqli_query($link,$query);
 
-	if ($result == FALSE)
-	{
-		printf("Échec de la requête '%s'", $query);
-		return FALSE;
-	}
-	else
-		return $result;
+	return $result;
 }
 
 /*Cette fonction prend en entrée une connexion vers la base de données du chat ainsi 
@@ -56,13 +50,7 @@ function executeUpdate($link, $query)
 
 	$result = mysqli_query($link,$query);
 
-	if ($result == FALSE)
-	{
-		printf("Échec de la requête '%s'", $query);
-		return FALSE;
-	}
-	else
-		return $result;
+	return $result;
 }
 
 /*Cette fonction ferme la connexion active $link passée en entrée*/
