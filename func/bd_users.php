@@ -4,16 +4,26 @@ require_once("./func/bd.php");
 
 function checkNicknameAvailability($link, $pseudo)
 {
-    $result = executeQuery($link, "SELECT pseudo FROM User WHERE pseudo = $pseudo");
-    return !boolval($result);
+    $result = mysqli_fetch_assoc( executeQuery($link, "SELECT pseudo FROM User WHERE pseudo = '$pseudo'") );
+    return $result == null;
 }
 
-function getUserPasswordHash($link, $pseudo)
+function checkUserPassword($link, $pseudo, $pwd)
 {
     $result = mysqli_fetch_assoc(
-        executeQuery($link, "SELECT passwordHash FROM User WHERE pseudo = $pseudo")
+        executeQuery($link, "SELECT passwordHash FROM User WHERE pseudo = '$pseudo'")
     );
-    return $result["passwordHash"];
+    return password_verify($pwd, $result["passwordHash"]);
+}
+
+function createAccount($link, $pseudo, $pwd)
+{
+    $hash = password_hash($pwd,PASSWORD_DEFAULT);
+    
+    return executeUpdate(
+        $link,
+        "INSERT INTO User (pseudo, passwordHash) VALUES ('$pseudo', '$hash')"
+    );
 }
 
 ?>
