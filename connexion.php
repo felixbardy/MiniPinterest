@@ -11,21 +11,19 @@
         if ( // Si le pseudo est déjà pris...
             !checkNicknameAvailability($_SESSION["connection"], $_POST["username"])
             // Et si les hashs de mots de passe fonctionnent,
-        &&  password_verify($_POST["password"], getUserPasswordHash($_SESSION["connection"], $_POST["username"])))
+        &&  checkUserPassword($_SESSION["connection"], $_POST["username"] ,$_POST["password"]))
         {
             // Si les hashs de mots de passe concordent, la connection est réussie
-            //TODO Valider la connection et rediriger vers l'accueil
+            $_SESSION["logged"] = true;
+            $_SESSION["username"] = $_POST["username"];
+            header("Location: ./index.php");
+            exit;
         }
         else
         {
             // Si le pseudo n'est pas pris, c'est un mauvais identifiant
             $BAD_CREDENTIALS = true;
         }
-    }
-    else
-    {
-      // Si aucun formulaire n'a été envoyé, se contenter d'afficher la page sans erreurs
-      $BAD_CREDENTIALS = false;
     }
 ?>
 
@@ -55,15 +53,15 @@
                                 <h3>Identifiant</h3>
                             </div>
                             <div class="row">
-                                <input class="form-control<?php if ($BAD_CREDENTIALS) echo " is-invalid";?>" type="text" name="username" placeholder="username">
+                                <input class="form-control<?php if (isset($BAD_CREDENTIALS)) echo " is-invalid";?>" type="text" name="username" placeholder="username">
                             </div>
                             <div class="row">
                                 <h3>Mot de passe</h3>
                             </div>
                             <div class="row">
-                                <input class="form-control<?php if ($BAD_CREDENTIALS) echo " is-invalid";?>" type="password" name="password">
+                                <input class="form-control<?php if (isset($BAD_CREDENTIALS)) echo " is-invalid";?>" type="password" name="password">
                             </div>
-                            <div class="row alert alert-danger" role="alert" <?php if (!$BAD_CREDENTIALS) echo "style=\"display:none\""?> >
+                            <div class="row alert alert-danger" role="alert" <?php if (!isset($BAD_CREDENTIALS)) echo "style=\"display:none\""?> >
                             Les informations de connexion entrées sont éronnées!
                             </div>
                             <div class="row">
