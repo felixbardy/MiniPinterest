@@ -66,10 +66,12 @@
         <title>
             Inscription
         </title>
-        <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
         <link rel="stylesheet" href="./style/style.css">
 
-        <script src="./bootstrap/bootstrap.min.js"></script>
+        <script src="./lib/js/jquery-3.3.1.min.js"></script>
+        <script src="./lib/js/popper.min.js"></script>
+        <script src="./lib/js/bootstrap.min.js"></script>
     </head>
     <body>
         <?php echo generatePageHeader("Inscription"); ?>
