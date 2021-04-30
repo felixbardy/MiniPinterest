@@ -37,4 +37,17 @@ function getCategoryByID($link, $id)
     
 }
 
+function getNextPhotoID($link)
+{
+    return mysqli_fetch_assoc(executeQuery($link, "SELECT MAX(photoId) AS max FROM Photo"))["max"];
+}
+
+function addImage($link, $nomFich, $description, $catId)
+{
+    return executeUpdate(
+        $link,
+        "INSERT INTO Photo (nomFich, description, catId) VALUES (\"$nomFich\", \"$description\", $catId)"
+    );
+}
+
 ?>
