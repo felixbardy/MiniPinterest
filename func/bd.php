@@ -38,7 +38,7 @@ message d'erreur est affiché.*/
 function executeUpdate($link, $query)
 {
 	if 
-	( 	// Si il n'y a aucun de ces mots clé
+	( 	// Si il n'y a aucun de ces mots clé en début de requête
 		   strpos($query, 'INSERT') != 0 
 		&& strpos($query, 'UPDATE') != 0 
 	  	&& strpos($query, 'DELETE') != 0
