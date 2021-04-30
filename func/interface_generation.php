@@ -1,37 +1,49 @@
 <?php
-
 function generatePageHeader($place)
 {
-  $header = "";
+  $header  = "";
+  $header .= "<nav class=\"navbar navbar-expand-md navbar-dark bg-dark\">
+  <a class=\"navbar-brand\" href=\"./index.php\">Mini-Pinterest</a>
+  <!-- Bouton affiché pour les petites interfaces -->
+  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExample04\" aria-controls=\"navbarsExample04\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+    <span class=\"navbar-toggler-icon\"></span>
+  </button>
 
-  // Début de la barre de navigation
-  $header .= "<nav class=\"navbar navbar-expand-lg navbar-light bg-white\">\n"
-         . "  <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n";
+  <div class=\"collapse navbar-collapse\" id=\"navbarsExample04\">
+    <ul class=\"navbar-nav mr-auto\">
+      <li class=\"nav-item dropdown\">
+        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdown04\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">Ajouter</a>
+        <div class=\"dropdown-menu\" aria-labelledby=\"dropdown04\">
+          <a class=\"dropdown-item\" href=\"#\">Catégorie</a>
+          <a class=\"dropdown-item\" href=\"./ajouter_image.php\">Image</a>
 
-  // Accueil
-  $header .= "    <li class=\"nav-item";
-  if ($place == "Home") $header .= " active";
-  $header .= "\">\n";
-  $header .= "      <a class=\"nav-link\" href=\"./index.php\">Accueil</a>\n";
-  $header .= "    </li>\n";
-
-  // Connexion
-  $header .= "    <li class=\"nav-item";
-  if ($place == "Connexion") $header .= " active";
-  $header .= "\">\n";
-  $header .= "      <a class=\"nav-link\" href=\"./connexion.php\">Connexion</a>\n";
-  $header .= "    </li>\n";
-
-  // Inscription
-  $header .= "    <li class=\"nav-item";
-  if ($place == "Inscription") $header .= " active";
-  $header .= "\">\n";
-  $header .= "      <a class=\"nav-link\" href=\"./inscription.php\">Inscription</a>\n";
-  $header .= "    </li>\n";
-
-  $header .= "  </ul>\n";
-  $header .= "</nav>\n";
-
+        </div>
+      </li>
+    </ul>
+    <ul class=\"navbar-nav\">";
+    if (!isset($_SESSION["logged"]) || !$_SESSION["logged"])
+    {
+      $header .= "<li class=\"nav-item";
+      if ($place == "Connexion") $header .= " active";
+      $header .= "\">
+        <a class=\"nav-link\" href=\"./connexion.php\">Connexion</a>
+      </li>
+      <li class=\"nav-item";
+      if ($place == "Inscription") $header .= " active";
+      $header .= "\">
+        <a class=\"nav-link\" href=\"./inscription.php\">Inscription</a>
+      </li>";
+    }
+    else
+    {
+      $header .= "<li class=\"nav-item navbar-text\">Bonjour " . $_SESSION["username"] . ".</li>";
+      $header .= "<li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"./deconnexion.php\">Déconnexion</a>
+      </li>";
+    }
+    $header .= "</ul>
+  </div>
+  </nav>";
   return $header;
 }
 
@@ -65,6 +77,16 @@ function generateImageDetails($photo, $category)
   
   return $table;
   
+}
+
+function generateError($message)
+{
+  return 
+  '<div class="row alert alert-danger"
+    role="alert"
+  >' .
+    $message .
+  '</div>';
 }
 
 ?>

@@ -35,13 +35,6 @@
       // Si aucune erreur n'a été détéctée, valider et créer le compte et connecter l'utilisateur
       if (empty($formErrors))
       {
-        //TODO valider et créer le compte, connecter l'utilisateur et rediriger vers l'accueil
-        echo "<p>";
-        echo "Inscription réussie!\n";
-        echo "username: " . $_POST["username"] . "\n";
-        echo "password: " . $_POST["password"] . "\n";
-        echo "password_validation: " . $_POST["repeat_password"] . "\n";
-        echo "</p>";
 
         if (!createAccount($_SESSION["connection"], $_POST["username"], $_POST["password"]))
         {
@@ -88,42 +81,74 @@
                                 <h3>Identifiant</h3>
                             </div>
                             <div class="row">
-                                <input class="form-control
-                                <?php if (isset($formErrors["nameTaken"]) || isset($formErrors["nameEmpty"])) echo " is-invalid";?>" type="text" name="username" placeholder="username">
+                                <input
+                                  class="form-control
+                                  <?php 
+                                  if (isset($formErrors["nameTaken"]) || isset($formErrors["nameEmpty"]))
+                                    echo " is-invalid";
+                                  ?>"
+                                  type="text" 
+                                  name="username" 
+                                  placeholder="username"
+                                >
                             </div>
 
-                            <div class="row alert alert-danger" role="alert" <?php if (!isset($formErrors["nameTaken"])) echo "style=\"display:none\""?> >
-                            Cet identifiant est déjà utilisé!
-                            </div>
+                            <?php
+                            if (isset($formErrors["nameTaken"]))
+                              echo generateError("Cet identifiant est déjà utilisé!")
+                            ?>
 
-                            <div class="row alert alert-danger" role="alert" <?php if (!isset($formErrors["nameEmpty"])) echo "style=\"display:none\""?> >
-                            Le nom d'utilisateur ne peut pas être vide!
-                            </div>
+                            <?php
+                            if(isset($formErrors["nameEmpty"]))
+                              echo generateError("Le nom d'utilisateur ne peut pas être vide!");
+                            ?>
 
                             <div class="row">
                                 <h3>Mot de passe</h3>
                             </div>
                             <div class="row">
-                                <input class="form-control<?php if (isset($formErrors["passwordEmpty"])) echo " is-invalid";?>" type="password" name="password">
+                                <input
+                                  class="form-control
+                                  <?php
+                                  if (isset($formErrors["passwordEmpty"]))
+                                    echo " is-invalid";
+                                  ?>"
+                                  type="password"
+                                  name="password"
+                                >
                             </div>
 
-                            <div class="row alert alert-danger" role="alert" <?php if (!isset($formErrors["passwordEmpty"])) echo "style=\"display:none\""?> >
-                            Veuillez entrer un mot de passe!
-                            </div>
+                            <?php
+                            if(isset($formErrors["passwordEmpty"]))
+                              echo generateError("Veuillez entrer un mot de passe!");
+                            ?>
 
                             <div class="row">
                                 <h3>Confirmer mot de passe</h3>
                             </div>
                             <div class="row">
-                                <input class="form-control<?php if (isset($formErrors["wrongValidation"])) echo " is-invalid";?>" type="password" name="repeat_password">
+                                <input 
+                                  class="form-control
+                                  <?php
+                                  if (isset($formErrors["wrongValidation"]))
+                                    echo " is-invalid";
+                                  ?>"
+                                  type="password"
+                                  name="repeat_password"
+                                >
                             </div>
-
-                            <div class="row alert alert-danger" role="alert" <?php if (!isset($formErrors["wrongValidation"])) echo "style=\"display:none\""?> >
-                            Les mots de passes ne correspondent pas!
-                            </div>
+                            
+                            <?php
+                            if(isset($formErrors["wrongValidation"]))
+                              echo generateError("Les mots de passe ne correspondent pas!");
+                            ?>
 
                             <div class="row">
-                                <input class="form-control" type="submit" value="Se connecter">
+                                <input 
+                                  class="form-control"
+                                  type="submit"
+                                  value="Se connecter"
+                                >
                             </div>
                         </div>
                     </form>
