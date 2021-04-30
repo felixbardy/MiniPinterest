@@ -5,6 +5,12 @@
     require_once("./func/interface_generation.php");
     $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
 
+    if (isset($_SESSION["logged"]) && $_SESSION["logged"])
+    {
+      header("Location: ./index.php");
+      exit;
+    }
+
     // Si les identifiants ont été rentrés, vérifier leur validité
     if ( !empty($_POST) )
     {   

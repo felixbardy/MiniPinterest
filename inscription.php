@@ -5,8 +5,11 @@
     require_once("./func/bd_users.php");
     $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
 
-    //if (isset($_SESSION["logged"]) && $_SESSION["logged"])
-      //TODO Rediriger vers l'accueil
+    if (isset($_SESSION["logged"]) && $_SESSION["logged"])
+    {
+      header("Location: ./index.php");
+      exit;
+    }
 
     $formErrors = [];
     
