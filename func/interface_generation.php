@@ -86,7 +86,20 @@ function generateImageDetails($photo, $category)
   
   return $table;
 }
-  
+
+function generateImageModifButton()
+{
+  // Bouton d'ouverture des contrôles de modification
+  $button = "<a class=\"btn btn-primary\""
+       . "data-toggle=\"collapse\""
+       . "href=\"#modificationDiv\""
+       . "role=\"button\""
+       . "aria-expanded=\"false\""
+       . "aria-controls=\"modificationDiv\""
+       . ">\n"
+       . "  Modifier\n"
+       . "</a>\n";
+  return $button;
 }
 
 function generateError($message)
