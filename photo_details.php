@@ -103,72 +103,92 @@
                   <?php echo "<img class=\"img-responsive\" src=\"img/" . $photo["nomFich"] . "\">"; ?>
               </div>
               <div class="col-md">
-                  <?php echo generateImageDetails($photo, $category); ?>
+                  <?php 
+                  echo generateImageDetails($photo, $category);
+
+                  if(!empty($formErrors))
+                    echo generateError("Une erreur est survenue lors de la modification!");
+
+                  if ( canModifyPhoto($photo) ) {
+                    echo generateImageModifButton();
+                  }
+                  ?>
               </div>
           </div>
-          <div class="row">
-            <div class="col-md">
-              <?php
-              if ( canModifyPhoto($photo) ) {
-                echo generateImageModifButton();
-              ?>
-              <div class="collapse" id="modificationDiv">
-                <div class="card card-body">
-                    <h1 align="center"><b>Modifier l'image</b></h1>
-                    <form name="edit-image" action="" method="POST">
-
-                      <h4><b>Description</b></h4>
-                      <div class="input-group mb-3">
-                        <textarea
-                          class="form-control"
-                          name="description"
-                          placeholder="Description de l'image"  
-                        ><?php
-                          echo $photo["description"];
-                        ?></textarea>
-                      </div>
-
-                      <?php
-                        if(isset($formErrors["descriptionEmpty"]))
-                          echo generateError("La description ne peut pas être vide!");
-                      ?>
-
-                      <h4><b>Catégorie</b></h4>
-                      <div class="input-group mb-3">
-
-                        <select class="form-control" name="category">
-                          <?php
-                          $categories = getAllCategories($_SESSION["connection"]);
-                          foreach($categories as $category) {
-                            echo "<option value=" . strval($category["catId"]);
-                            if ($photo["catId"] == $category["catId"])
-                              echo " selected";
-                            echo ">" . $category["nomCat"] . "</option>\n";
-                          }
-                          ?>
-                        </select>
-
-                      </div>
-                      <div class="input-group mb-3">
-                          <button type="submit" class="btn btn-success">
-                            Valider
-                          </button>
-                      </div>
-
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                        Supprimer
-                      </button>
-
-                    </form>
-                </div> <!-- card -->
-              </div> <!-- collapse -->
-              <?php 
-              } // End of "if (user == author)"
-              ?>
-            </div> <!-- column -->
-          </div> <!-- row -->
         </div> <!-- container -->
         <?php if ( canModifyPhoto($photo) ) { ?>
+
+        <div class="modal fade" id="editModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modifier</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h1 align="center"><b>Modifier l'image</b></h1>
+                <form id="form-edit-image" name="edit-image" action="" method="POST">
+                  <input type="hidden" name="form-name" value="edit-image" />
+
+                  <h4><b>Description</b></h4>
+                  <div class="input-group mb-3">
+                    <textarea
+                      class="form-control"
+                      name="description"
+                      placeholder="Description de l'image"  
+                    ><?php
+                      echo $photo["description"];
+                    ?></textarea>
+                  </div>
+
+                  <?php
+                    if(isset($formErrors["descriptionEmpty"]))
+                      echo generateError("La description ne peut pas être vide!");
+                  ?>
+
+                  <h4><b>Catégorie</b></h4>
+                  <div class="input-group mb-3">
+
+                    <select class="form-control" name="category">
+                      <?php
+                      $categories = getAllCategories($_SESSION["connection"]);
+                      foreach($categories as $category) {
+                        echo "<option value=" . strval($category["catId"]);
+                        if ($photo["catId"] == $category["catId"])
+                          echo " selected";
+                        echo ">" . $category["nomCat"] . "</option>\n";
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                  <div class="custom-control custom-switch">
+                      <input 
+                        type="checkbox"
+                        class="custom-control-input"
+                        name="hidden"
+                        value="yes"
+                        id="input-photo-hidden"
+                        <?php if ($photo["hidden"]) echo "checked" ?>
+                      >
+                      <label class="custom-control-label" for="input-photo-hidden">Cachée</label>
+                    </div>
+                  </form>
+              </div> <!-- modal-body -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger mr-auto" data-toggle="modal" data-target="#deleteModal">
+                  Supprimer
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button form="form-edit-image" type="submit" class="btn btn-success">Valider</button>
+              </div>
+            </div> <!-- modal-content -->
+          </div> <!-- modal-dialog -->
+        </div> <!-- modal -->
+
         <div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -182,7 +202,7 @@
                 Voulez vous vraiment supprimer cette photo?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
                 <form name="delete-photo" action="" method="POST">
                   <input type="hidden" name="form-name" value="delete-photo" />
                   <button type="submit" class="btn btn-danger">Supprimer</button>
