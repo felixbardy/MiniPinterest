@@ -39,7 +39,23 @@ function getCategoryByID($link, $id)
 
 function getNextPhotoID($link)
 {
-    return mysqli_fetch_assoc(executeQuery($link, "SELECT MAX(photoId) AS max FROM Photo"))["max"];
+    return mysqli_fetch_assoc(
+        executeQuery(
+            $link,
+            "SELECT AUTO_INCREMENT
+            FROM  INFORMATION_SCHEMA.TABLES
+            WHERE TABLE_SCHEMA = 'images'
+            AND   TABLE_NAME   = 'Photo'"
+        )
+    )["AUTO_INCREMENT"];
+}
+
+function addImage($link, $nomFich, $description, $catId, $auteur)
+{
+    return executeUpdate(
+        $link,
+        "INSERT INTO Photo (nomFich, description, catId, auteur) VALUES (\"$nomFich\", \"$description\", $catId, \"$auteur\")"
+    );
 }
 
 function addImage($link, $nomFich, $description, $catId)
