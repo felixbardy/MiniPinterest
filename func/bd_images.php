@@ -58,6 +58,14 @@ function addImage($link, $nomFich, $description, $catId, $auteur)
     );
 }
 
+function editImage($link, $id, $description, $catId, $hidden)
+{
+    return executeUpdate(
+        $link,
+        "UPDATE Photo SET description = \"$description\", catId = \"$catId\", hidden = $hidden WHERE Photo.photoId = $id"
+    );
+}
+
 function removeImage($link, $id)
 {
     return executeUpdate(
