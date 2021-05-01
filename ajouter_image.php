@@ -39,8 +39,19 @@
         $target_dir = "./img/";
         $photoId = getNextPhotoID($_SESSION["connection"]);
         $target_file = "DSC" . strval($photoId) . ".$file_type";
-        addImage($_SESSION["connection"], $target_file, $_POST["description"], $_POST["category"], $_SESSION["username"]);
-        move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $target_file);
+
+        addImage(
+          $_SESSION["connection"],
+          $target_file,
+          $_POST["description"],
+          $_POST["category"],
+          $_SESSION["username"]
+        );
+
+        move_uploaded_file(
+          $_FILES["image"]["tmp_name"],
+          $target_dir . $target_file
+        );
 
         header("Location: ./photo_details.php?photoId=$photoId");
         exit;
