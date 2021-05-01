@@ -2,18 +2,29 @@
 function generatePageHeader($place)
 {
   $header  = "";
-  $header .= "<nav class=\"navbar navbar-expand-md navbar-dark bg-dark\">
+  $header .= "<nav class=\"navbar navbar-expand-md sticky-top navbar-dark bg-dark\">
   <a class=\"navbar-brand\" href=\"./index.php\">Mini-Pinterest</a>
   <!-- Bouton affiché pour les petites interfaces -->
-  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExample04\" aria-controls=\"navbarsExample04\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+  <button 
+    class=\"navbar-toggler\" type=\"button\"
+    data-toggle=\"collapse\" data-target=\"#mainNavbar\"
+    aria-controls=\"mainNavbar\" aria-expanded=\"false\"
+    aria-label=\"Toggle navigation\"
+    >
     <span class=\"navbar-toggler-icon\"></span>
   </button>
 
-  <div class=\"collapse navbar-collapse\" id=\"navbarsExample04\">
+  <div class=\"collapse navbar-collapse\" id=\"mainNavbar\">
     <ul class=\"navbar-nav mr-auto\">
       <li class=\"nav-item dropdown\">
-        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdown04\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">Ajouter</a>
-        <div class=\"dropdown-menu\" aria-labelledby=\"dropdown04\">
+        <a 
+          class=\"nav-link dropdown-toggle\" href=\"#\"
+          id=\"draopdown-ajouter\" data-toggle=\"dropdown\"
+          aria-haspopup=\"true\" aria-expanded=\"true\"
+        >
+          Ajouter
+        </a>
+        <div class=\"dropdown-menu\" aria-labelledby=\"draopdown-ajouter\">
           <a class=\"dropdown-item\" href=\"#\">Catégorie</a>
           <a class=\"dropdown-item\" href=\"./ajouter_image.php\">Image</a>
 
