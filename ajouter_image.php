@@ -37,11 +37,13 @@
       if (empty($formErrors))
       {
         $target_dir = "./img/";
-        $target_file = "DSC" . strval(getNextPhotoID($_SESSION["connection"])) . ".$file_type";
-        print_r(
-        addImage($_SESSION["connection"], $target_file, $_POST["description"], $_POST["category"])
-        );
+        $photoId = getNextPhotoID($_SESSION["connection"]);
+        $target_file = "DSC" . strval($photoId) . ".$file_type";
+        addImage($_SESSION["connection"], $target_file, $_POST["description"], $_POST["category"], $_SESSION["username"]);
         move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $target_file);
+
+        header("Location: ./photo_details.php?photoId=$photoId");
+        exit;
       }
     }
 ?>
@@ -150,8 +152,20 @@
     </div>
   </body>
   <!-- Petit script pour mettre à jour le champ d'input à l'ajout d'un fichier -->
-  <script>
+  <script language="JavaScript">
     const img_in = document.getElementById("image-input");
-    img_in.oninput = () => img_in.nextElementSibling.innerHTML = img_in.files[0].name; 
+    const max_size = 100000; //100 kB
+    img_in.oninput = () => {
+      let file = img_in.files[0];
+      if (file.size > max_size) { // Si le fichier est trop gros:
+        alert("Le fichier est trop volumineux! (max: 100ko)"); // On envoie un pop-up d'erreur
+        img_in.value = null; // On vide le champ
+      }
+      else { // Sinon on affiche le nom du fichier dans le champ
+        img_in.nextElementSibling.innerHTML = file.name;
+      }
+    }
+    
+
   </script>
 </html>
