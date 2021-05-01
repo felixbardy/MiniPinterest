@@ -22,6 +22,8 @@
             // Si les hashs de mots de passe concordent, la connection est réussie
             $_SESSION["logged"] = true;
             $_SESSION["username"] = $_POST["username"];
+            $_SESSION["admin"] = isUserAdmin($_SESSION["connection"], $_POST["username"]);
+
             header("Location: ./index.php");
             exit;
         }

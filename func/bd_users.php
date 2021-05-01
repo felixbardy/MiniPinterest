@@ -16,6 +16,16 @@ function checkUserPassword($link, $pseudo, $pwd)
     return password_verify($pwd, $result["passwordHash"]);
 }
 
+function isUserAdmin($link, $pseudo)
+{
+    return mysqli_fetch_assoc( 
+            executeQuery(
+            $link,
+            "SELECT admin FROM User WHERE pseudo=\"$pseudo\""
+        )
+    )["admin"];
+}
+
 function createAccount($link, $pseudo, $pwd)
 {
     $hash = password_hash($pwd,PASSWORD_DEFAULT);

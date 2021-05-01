@@ -44,6 +44,8 @@
         {
           $_SESSION["logged"] = true;
           $_SESSION["username"] = $_POST["username"];
+          $_SESSION["admin"] = false;
+
           header("Location: ./index.php");
           exit;
         }
