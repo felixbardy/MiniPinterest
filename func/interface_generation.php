@@ -75,6 +75,11 @@ function generateImageDetails($photo, $category)
     $auteur = "aucun";
   else
     $auteur = $photo["auteur"];
+
+  if ($photo["hidden"])
+    $hidden = "Oui";
+  else
+    $hidden = "Non";
            
   $table = "<table class=\"table\">\n"
          . "  <tr>\n"
@@ -105,15 +110,13 @@ function generateImageDetails($photo, $category)
 function generateImageModifButton()
 {
   // Bouton d'ouverture des contrôles de modification
-  $button = "<a class=\"btn btn-primary\""
-       . "data-toggle=\"collapse\""
-       . "href=\"#modificationDiv\""
-       . "role=\"button\""
-       . "aria-expanded=\"false\""
-       . "aria-controls=\"modificationDiv\""
+  $button = "<button type=\"button\""
+       . "class=\"btn btn-primary\""
+       . "data-toggle=\"modal\""
+       . "data-target=\"#editModal\""
        . ">\n"
        . "  Modifier\n"
-       . "</a>\n";
+       . "</button>\n";
   return $button;
 }
 
