@@ -60,6 +60,11 @@ function generateImageGallery($images)
 
 function generateImageDetails($photo, $category)
 {
+  if (is_null($photo["auteur"]))
+    $auteur = "aucun";
+  else
+    $auteur = $photo["auteur"];
+           
   $table = "<table class=\"table\">\n"
          . "  <tr>\n"
          . "    <th>Description</th>\n"
@@ -70,12 +75,17 @@ function generateImageDetails($photo, $category)
          . "    <td>" . $photo["nomFich"] . "</td>\n"
          . "  </tr>\n"
          . "  <tr>\n"
+         . "    <th>Auteur</th>\n"
+         . "    <td>" . $auteur . "</td>\n"
+         . "  </tr>\n"
+         . "  <tr>\n"
          . "    <th>Catégorie</th>\n"
          . "    <td><a href=\"./index.php?category=" . strval($category["catId"]) . "\">" . $category["nomCat"] . "</a></td>\n"
          . "  </tr>\n"
          . "</table>\n";
   
   return $table;
+}
   
 }
 
