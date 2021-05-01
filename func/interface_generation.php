@@ -93,6 +93,10 @@ function generateImageDetails($photo, $category)
          . "    <th>Catégorie</th>\n"
          . "    <td><a href=\"./index.php?category=" . strval($category["catId"]) . "\">" . $category["nomCat"] . "</a></td>\n"
          . "  </tr>\n"
+         . "  <tr>\n"
+         . "    <th>Cachée</th>\n"
+         . "    <td>$hidden</td>\n"
+         . "  </tr>\n"
          . "</table>\n";
   
   return $table;
