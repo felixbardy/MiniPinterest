@@ -58,11 +58,11 @@ function addImage($link, $nomFich, $description, $catId, $auteur)
     );
 }
 
-function addImage($link, $nomFich, $description, $catId)
+function removeImage($link, $id)
 {
     return executeUpdate(
         $link,
-        "INSERT INTO Photo (nomFich, description, catId) VALUES (\"$nomFich\", \"$description\", $catId)"
+        "DELETE FROM Photo WHERE Photo.photoId = $id"
     );
 }
 
