@@ -16,20 +16,21 @@
         header("Location: ./index.php");
         exit;
     }
-    else
-    {
-      $photo = getImageByID($_SESSION["connection"], $_GET["photoId"]);
-      $category = getCategoryByID($_SESSION["connection"],$photo["catId"]);
-    }
+
+    $photo = getImageByID($_SESSION["connection"], $_GET["photoId"]);
+    $category = getCategoryByID($_SESSION["connection"],$photo["catId"]);
+    
 
     $formErrors = [];
+
+    
 
     if (!empty($_POST) && $_POST["form-name"] == "delete-photo")
     {
       // Les droits pourraient être modifiés entre l'accès à la page et l'envoi du formulaire
       if (!canModifyPhoto($photo))
         $formErrors["notAuthorized"] = true;
-      
+
       // S'il n'y a pas d'erreurs, supprimer l'image
       if (empty($formErrors))
       {
@@ -41,6 +42,38 @@
         exit;
       }
     }
+    else if (!empty($_POST) && $_POST["form-name"] == "edit-image")
+    {
+      // Les droits pourraient être modifiés entre l'accès à la page et l'envoi du formulaire
+      if (!canModifyPhoto($photo))
+        $formErrors["notAuthorized"] = true;
+      
+      // La description ne peut pas être vide
+      if ($_POST["description"] == "")
+        $formErrors["descriptionEmpty"] = true;
+
+      // S'il n'y a pas d'erreurs, modifier l'image
+      if (empty($formErrors))
+      {
+        if (isset($_POST["hidden"])) $isHidden = 1;
+        else $isHidden = 0;
+        
+        editImage(
+          $_SESSION["connection"],
+          $photo["photoId"],
+          $_POST["description"],
+          $_POST["category"],
+          $isHidden
+        );
+        
+        // On remet l'image à jour après sa modification
+        $photo = getImageByID(
+          $_SESSION["connection"],
+          $_GET["photoId"]
+        );
+      }
+    }    
+
 ?>
 <!doctype html>
 <html lang="fr">
