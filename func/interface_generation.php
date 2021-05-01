@@ -26,19 +26,19 @@ function generatePageHeader($place)
       $header .= "<li class=\"nav-item";
       if ($place == "Connexion") $header .= " active";
       $header .= "\">
-        <a class=\"nav-link\" href=\"./connexion.php\">Connexion</a>
+        <a href=\"./connexion.php\"><button class=\"btn btn-secondary\">Connexion</button></a>
       </li>
       <li class=\"nav-item";
       if ($place == "Inscription") $header .= " active";
       $header .= "\">
-        <a class=\"nav-link\" href=\"./inscription.php\">Inscription</a>
+        <a href=\"./inscription.php\"><button class=\"btn btn-success\">Inscription</button></a>
       </li>";
     }
     else
     {
       $header .= "<li class=\"nav-item navbar-text\">Bonjour " . $_SESSION["username"] . ".</li>";
       $header .= "<li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"./deconnexion.php\">Déconnexion</a>
+        <a href=\"./deconnexion.php\"><button class=\"btn btn-secondary\">Déconnexion</button></a>
       </li>";
     }
     $header .= "</ul>
