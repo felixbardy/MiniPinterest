@@ -23,6 +23,7 @@
             $_SESSION["logged"] = true;
             $_SESSION["username"] = $_POST["username"];
             $_SESSION["admin"] = isUserAdmin($_SESSION["connection"], $_POST["username"]);
+            $_SESSION["logged_at"] = time();
 
             header("Location: ./index.php");
             exit;

@@ -1,6 +1,19 @@
 <?php
+
+function getElapsedTimeString($start, $stop)
+{
+  $delta = $stop - $start;
+  $h = intval($delta / 3600);
+  $m = intval($delta / 60 - 60 * $h);
+  return "$h" . "H $m" . "min";
+}
 function generatePageHeader($place)
 {
+  if (isset($_SESSION["logged_at"]))
+  {
+    $now = time();
+  }
+
   $header  = "";
   $header .= "<nav class=\"navbar navbar-expand-md sticky-top navbar-dark bg-dark\">
   <a class=\"navbar-brand\" href=\"./index.php\">Mini-Pinterest</a>
@@ -47,7 +60,10 @@ function generatePageHeader($place)
     }
     else
     {
-      $header .= "<li class=\"nav-item navbar-text\">Bonjour " . $_SESSION["username"] . ".</li>";
+      $header .= "<li class=\"nav-item navbar-text\">
+                    Bonjour " . $_SESSION["username"] . 
+                 ". (Connecté depuis " . getElapsedTimeString($_SESSION["logged_at"], $now) . " )" .
+                 "</li>";
       $header .= "<li class=\"nav-item\">
         <a href=\"./deconnexion.php\"><button class=\"btn btn-secondary\">Déconnexion</button></a>
       </li>";
