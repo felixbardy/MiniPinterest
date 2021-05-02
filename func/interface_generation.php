@@ -29,19 +29,28 @@ function generatePageHeader($place)
 
   <div class=\"collapse navbar-collapse\" id=\"mainNavbar\">
     <ul class=\"navbar-nav mr-auto\">
-      <li class=\"nav-item dropdown\">
-        <a 
-          class=\"nav-link dropdown-toggle\" href=\"#\"
-          id=\"draopdown-ajouter\" data-toggle=\"dropdown\"
-          aria-haspopup=\"true\" aria-expanded=\"true\"
+      <li class=\"nav-item";
+      if ($place == "Accueil") $header .= " active";
+      $header .= "\">
+        <a
+          class=\"nav-link\"
+          href=\"./index.php\"
         >
-          Ajouter
+          Accueil
         </a>
-        <div class=\"dropdown-menu\" aria-labelledby=\"draopdown-ajouter\">
-          <a class=\"dropdown-item\" href=\"#\">Catégorie</a>
-          <a class=\"dropdown-item\" href=\"./ajouter_image.php\">Image</a>
-
-        </div>
+      </li>
+      <li class=\"nav-item";
+      if ($place == "Mes_images") $header .= " active";
+      $header .= "\">
+        <a
+          class=\"nav-link\"
+          href=\"./mes_images.php\"
+        >
+          Mes images
+        </a>
+      </li>
+      <li class=\"nav-item \">
+        <a href=\"./ajouter_image.php\"><button class=\"btn btn-success\">Ajouter une image </button></a>
       </li>
     </ul>
     <ul class=\"navbar-nav\">";
