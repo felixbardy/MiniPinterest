@@ -18,10 +18,34 @@ function getAllImages($link)
     );
 }
 
+function getAllVisibleImages($link)
+{
+    return mysqli_fetch_all(
+        executeQuery($link, "SELECT * FROM Photo WHERE hidden = 0"),
+        MYSQLI_ASSOC
+    );
+}
+
 function getImagesFromCategoryID($link, $catId)
 {
     return mysqli_fetch_all(
         executeQuery($link, "SELECT * FROM Photo WHERE catId=$catId"),
+        MYSQLI_ASSOC
+    );
+}
+
+function getVisibleImagesFromCategoryID($link, $catId)
+{
+    return mysqli_fetch_all(
+        executeQuery($link, "SELECT * FROM Photo WHERE catId=$catId AND hidden = 0"),
+        MYSQLI_ASSOC
+    );
+}
+
+function getImagesFromUser($link, $pseudo)
+{
+    return mysqli_fetch_all(
+        executeQuery($link, "SELECT * FROM Photo WHERE auteur=\"$pseudo\""),
         MYSQLI_ASSOC
     );
 }
