@@ -20,7 +20,7 @@
     </head>
     <body>
     <?php 
-    echo generatePageHeader("Home");
+    echo generatePageHeader("Accueil");
     ?>
     <form name="select_category" action="" method="GET">
       <div class="input-group mb-3">
@@ -47,9 +47,9 @@
     <?php
         //On récupère les images à afficher
         if (!array_key_exists("category", $_GET) || $_GET["category"] == "all")
-          $images = getAllImages($_SESSION["connection"]);
+          $images = getAllVisibleImages($_SESSION["connection"]);
         else
-          $images = getImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
+          $images = getVisibleImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
         
         echo generateImageGallery($images);
 
