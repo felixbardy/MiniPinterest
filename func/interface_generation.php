@@ -48,8 +48,22 @@ function generatePageHeader($place)
         >
           Mes images
         </a>
-      </li>
-      <li class=\"nav-item \">
+      </li>";
+      // Si l'utilisateur est administrateur
+      if (isset($_SESSION["admin"]) && $_SESSION["admin"])
+      {
+        $header .= "<li class=\"nav-item";
+        if ($place == "Statistiques") $header .= " active";
+        $header .= "\">
+        <a
+          class=\"nav-link\"
+          href=\"./statistiques.php\"
+        >
+          Statistiques
+        </a>
+        </li>";
+      }
+      $header .= "<li class=\"nav-item \">
         <a href=\"./ajouter_image.php\"><button class=\"btn btn-success\">Ajouter une image </button></a>
       </li>
     </ul>
