@@ -1,4 +1,25 @@
 div.img-gallery > a > img {
     height: 200px;
     padding: 20px;
+    border-radius: 30px;
 }
+
+.hidden-image {
+    filter: grayscale(1);
+    outline-width: 5px;
+    outline-style:dashed;
+    outline-offset: -20px;
+}
+
+.hidden-image:hover {
+    filter: grayscale(0);
+}
+
+table.stats-table th {
+    text-align: center;
+}
+
+table.stats-table td {
+    text-align: center;
+}
+
