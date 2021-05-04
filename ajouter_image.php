@@ -33,7 +33,7 @@
         $formErrors["noCategory"] = true;
       
       
-      //TODO Si aucune erreur n'est trouvée, valider
+      // Si aucune erreur n'est trouvée, valider
       if (empty($formErrors))
       {
         $target_dir = "./img/";

@@ -34,7 +34,6 @@
   <div class="container">
     <h1 class="title">Statistiques</h1>
     <div class="row">
-      <!--//TODO Afficher le nombre d'images, de catégories, d'utilisateurs -->
       <div class="col-12">
         <table class="table table-bordered text-center stats-table">
           <thead>

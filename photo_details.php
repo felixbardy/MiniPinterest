@@ -47,8 +47,8 @@
         removeImage($_SESSION["connection"], $photo["photoId"]);
         unlink("./img/" . $photo["nomFich"]);
 
-        //TODO Rediriger vers "mes_photos.php" à la place
-        header("Location: ./index.php");
+        // Rediriger vers "mes_photos.php" à la place
+        header("Location: ./mes_photos.php");
         exit;
       }
     }
