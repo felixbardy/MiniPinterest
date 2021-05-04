@@ -106,7 +106,7 @@ function generateImageGallery($images)
     {
       $gallery .= "<a href='./photo_details.php?photoId=" . strval($image["photoId"]) . "'><img";
       if($image["hidden"]) $gallery .= " class=\"hidden-image\"";
-      $gallery .=" src='img/" . $image["nomFich"] . "'></a>\n";
+      $gallery .=" src='img/" . $image["nomFich"] . "' alt=\"" . $image["description"] . "\"></a>\n";
     }
     $gallery .= "</div>\n";
     return $gallery;
