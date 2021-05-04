@@ -21,7 +21,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Projet BDW1 2021</title>
+        <title>Mini-Pinterest</title>
         <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
         <link rel="stylesheet" href="./style/style.css">
 
