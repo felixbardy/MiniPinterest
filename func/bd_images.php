@@ -98,4 +98,87 @@ function removeImage($link, $id)
     );
 }
 
+function imageCount($link)
+{
+    return mysqli_fetch_assoc(
+        executeQuery(
+            $link,
+            "SELECT COUNT(*) AS total FROM Photo"
+        )
+    )["total"];
+}
+
+function categoryCount($link)
+{
+    return mysqli_fetch_assoc(
+        executeQuery(
+            $link,
+            "SELECT COUNT(*) AS total FROM Categorie"
+        )
+    )["total"];
+}
+
+function imageCountPerCategory($link)
+{
+    $counts = mysqli_fetch_all(
+        executeQuery(
+            $link,
+            "SELECT Categorie.nomCat, Categorie.catId, " .
+            "COUNT(DISTINCT Photo.photoId) AS total, SUM(Photo.hidden=1) AS hidden " .
+            "FROM Categorie JOIN Photo ON Categorie.catId = Photo.catId " .
+            "GROUP BY Photo.catId",
+        ),
+        MYSQLI_ASSOC
+    );
+
+    //FIXME Trouver un moyen de le faire dans la requête
+    // Correction du résultat final pour inclure les catégories éliminés par 'JOIN ON'
+    $categories = getAllCategories($link);
+    foreach($categories as $category)
+    {
+        $hasImages = false;
+        foreach($counts as $count)
+            if ($category["catId"] == $count["catId"]) $hasImages = true;
+        
+        if (!$hasImages) $counts[] = array(
+            "nomCat" => $category["nomCat"],
+            "catId" => $category["catId"],
+            "total" => "0",
+            "hidden" => "0"
+        );
+    }
+
+    return $counts;
+}
+
+function imageCountPerUser($link)
+{
+    $counts = mysqli_fetch_all(
+        executeQuery(
+            $link,
+            "SELECT User.pseudo, COUNT(DISTINCT Photo.photoId) AS total, " .
+            "SUM(Photo.hidden=1) as hidden " .
+            "FROM User JOIN Photo ON User.pseudo = Photo.auteur GROUP BY User.pseudo "
+        ),
+        MYSQLI_ASSOC
+    );
+
+    //FIXME Trouver un moyen de le faire dans la requête
+    // Correction du résultat final pour inclure les utilisateurs éliminés par 'JOIN ON'
+    $usernames = getAllUsernames($link);
+    foreach($usernames as $username) {
+        $hasImages = false;
+        foreach($counts as $count)
+            if ($username == $count["pseudo"]) $hasImages = true;
+        
+        if (!$hasImages) $counts[] = array(
+            "pseudo" => $username,
+            "total" => "0",
+            "hidden" => "0"
+        );
+    }
+
+    return $counts;
+}
+
 ?>
