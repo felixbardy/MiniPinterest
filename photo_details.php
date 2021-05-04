@@ -20,6 +20,16 @@
     $photo = getImageByID($_SESSION["connection"], $_GET["photoId"]);
     $category = getCategoryByID($_SESSION["connection"],$photo["catId"]);
     
+    // Si la photo est cachée et que l'utilisateur
+    // n'est ni admin ni son auteur, rediriger vers l'accueil
+    if (
+      $photo["hidden"]
+      && !( $_SESSION["admin"] || $_SESSION["username"] == $photo["auteur"] )
+      )
+    {
+      header("Location: ./index.php");
+      exit;
+    }
 
     $formErrors = [];
 
