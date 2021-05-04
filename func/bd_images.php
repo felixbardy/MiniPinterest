@@ -5,7 +5,10 @@ require_once("./func/bd.php");
 function getAllCategories($link)
 {
     return mysqli_fetch_all(
-        executeQuery($link, "SELECT * FROM Categorie"),
+        executeQuery(
+            $link,
+            "SELECT * FROM Categorie"
+        ),
         MYSQLI_ASSOC
     );
 }
@@ -13,7 +16,10 @@ function getAllCategories($link)
 function getAllImages($link)
 {
     return mysqli_fetch_all(
-        executeQuery($link, "SELECT * FROM Photo"),
+        executeQuery(
+            $link,
+            "SELECT * FROM Photo"
+        ),
         MYSQLI_ASSOC
     );
 }
@@ -21,7 +27,10 @@ function getAllImages($link)
 function getAllVisibleImages($link)
 {
     return mysqli_fetch_all(
-        executeQuery($link, "SELECT * FROM Photo WHERE hidden = 0"),
+        executeQuery(
+            $link,
+            "SELECT * FROM Photo WHERE hidden = 0"
+        ),
         MYSQLI_ASSOC
     );
 }
@@ -29,7 +38,10 @@ function getAllVisibleImages($link)
 function getImagesFromCategoryID($link, $catId)
 {
     return mysqli_fetch_all(
-        executeQuery($link, "SELECT * FROM Photo WHERE catId=$catId"),
+        executeQuery(
+            $link,
+            "SELECT * FROM Photo WHERE catId=$catId"
+        ),
         MYSQLI_ASSOC
     );
 }
@@ -37,7 +49,10 @@ function getImagesFromCategoryID($link, $catId)
 function getVisibleImagesFromCategoryID($link, $catId)
 {
     return mysqli_fetch_all(
-        executeQuery($link, "SELECT * FROM Photo WHERE catId=$catId AND hidden = 0"),
+        executeQuery(
+            $link,
+            "SELECT * FROM Photo WHERE catId=$catId AND hidden = 0"
+        ),
         MYSQLI_ASSOC
     );
 }
@@ -45,19 +60,32 @@ function getVisibleImagesFromCategoryID($link, $catId)
 function getImagesFromUser($link, $pseudo)
 {
     return mysqli_fetch_all(
-        executeQuery($link, "SELECT * FROM Photo WHERE auteur=\"$pseudo\""),
+        executeQuery(
+            $link,
+            "SELECT * FROM Photo WHERE auteur=\"$pseudo\""
+        ),
         MYSQLI_ASSOC
     );
 }
 
 function getImageByID($link, $id)
 {
-    return mysqli_fetch_assoc(executeQuery($link, "SELECT * FROM Photo WHERE photoId=$id"));
+    return mysqli_fetch_assoc(
+        executeQuery(
+            $link,
+            "SELECT * FROM Photo WHERE photoId=$id"
+        )
+    );
 }
 
 function getCategoryByID($link, $id)
 {
-    return mysqli_fetch_assoc(executeQuery($link, "SELECT * FROM Categorie WHERE catId=$id"));
+    return mysqli_fetch_assoc(
+        executeQuery(
+            $link,
+            "SELECT * FROM Categorie WHERE catId=$id"
+        )
+    );
     
 }
 
