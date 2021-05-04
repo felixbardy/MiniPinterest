@@ -29,24 +29,24 @@
 <!doctype html>
 <html lang="fr">
   <head>
-      <meta charset="utf-8">
-      <title>Mes images</title>
-      <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
-      <link rel="stylesheet" href="./style/style.css">
-
-      <script src="./lib/js/jquery-3.3.1.min.js"></script>
-      <script src="./lib/js/popper.min.js"></script>
-      <script src="./lib/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <title>Mes images</title>
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    
+    <script src="./lib/js/jquery-3.3.1.min.js"></script>
+    <script src="./lib/js/popper.min.js"></script>
+    <script src="./lib/js/bootstrap.min.js"></script>
   </head>
   <body>
   <?php 
   echo generatePageHeader("Mes_images");
   ?>
-  <!--// TODO Ajouter des filtres //-->
+  <h1 class="title">Images de <?php echo $user ?>:</h2>
   <?php
   $images = getImagesFromUser(
     $_SESSION["connection"],
-    $_SESSION["username"]
+    $user
   );
   echo generateImageGallery($images);
   ?>
