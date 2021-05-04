@@ -36,4 +36,31 @@ function createAccount($link, $pseudo, $pwd)
     );
 }
 
+function getAllUsernames($link)
+{
+    $rawresult = executeQuery(
+        $link,
+        "SELECT pseudo FROM User"
+    );
+    $result = [];
+    
+    $username = mysqli_fetch_assoc($rawresult)["pseudo"];
+    while(!is_null($username))
+    {
+        $result[] = $username;
+        $username = mysqli_fetch_assoc($rawresult)["pseudo"];
+    }
+    return $result;
+}
+
+function userCount($link)
+{
+    return mysqli_fetch_assoc(
+        executeQuery(
+            $link,
+            "SELECT COUNT(*) AS total FROM User"
+        )
+    )["total"];
+}
+
 ?>
