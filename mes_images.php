@@ -2,9 +2,10 @@
   session_start();
   require_once("./func/bd.php");
   require_once("./func/bd_images.php");
+  require_once("./func/bd_users.php");
   require_once("./func/interface_generation.php");
   $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
-
+  
   // Si l'utilisateur n'est pas connecté,
   // le rediriger vers la page de connection
   if (!isset($_SESSION["logged"]) || !$_SESSION["logged"])
@@ -12,8 +13,18 @@
     header("Location: ./connexion.php");
     exit;
   }
-
-?>
+  
+  // Si l'utilisateur est administrateur
+  if ( isset($_SESSION["admin"]) && $_SESSION["admin"]
+  // A renseigné l'agument user
+  && isset($_GET["user"])
+  // Et le nom d'utilisateur existe
+  && !checkNicknameAvailability($_SESSION["connection"], urldecode($_GET["user"]))
+  // Afficher les images de cet utilisateur
+  ) $user = urldecode($_GET["user"]);
+  // Sinon, prendre l'utilisateur actuel
+  else $user = $_SESSION["username"];
+  ?>
 
 <!doctype html>
 <html lang="fr">
