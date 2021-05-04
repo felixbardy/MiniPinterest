@@ -4,6 +4,17 @@
   require_once("./func/bd_images.php");
   require_once("./func/interface_generation.php");
   $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
+
+  // Si le champ showHidden est vrai
+  if (isset($_GET["showHidden"]) && $_GET["showHidden"])
+  {
+    // Et si l'utilisateur est administrateur
+    if (isset($_SESSION["admin"]) && $_SESSION["admin"])
+    {
+      // Autoriser à afficher les images cachées
+      $showHidden = true;
+    }
+  }
 ?>
 
 <!doctype html>
@@ -22,35 +33,58 @@
     <?php 
     echo generatePageHeader("Accueil");
     ?>
-    <form name="select_category" action="" method="GET">
-      <div class="input-group mb-3">
-        <select name="category" id="category">
-          <option value="all" class="form-control">Toutes les photos</option>
-          <?php
-              $categories = getAllCategories($_SESSION["connection"]);
-              foreach($categories as $category)
-              {
-                // Si la catégorie a été séléctionée, l'afficher comme telle
-                if (!is_null($_GET["category"]) && $_GET["category"] == $category["catId"])
-                  echo "<option value=" . strval($category["catId"]) . " selected>" . $category["nomCat"] . "</option>\n";
-                else
-                  echo "<option value=" . strval($category["catId"]) . ">" . $category["nomCat"] . "</option>\n";
-              }
-          ?>
-        </select>
-        <button type="submit" class="btn btn-primary">
-          Filtrer
-        </button>
-      </div>
-    </form>
-    <br>
+    <div class="container">
+      <form name="select_category" action="" method="GET">
+        <div class="input-group mb-3">
+          <?php if (isset($_SESSION["admin"]) && $_SESSION["admin"]) { ?>
+            <div class="custom-control custom-switch">
+              <input 
+                type="checkbox"
+                class="custom-control-input"
+                name="showHidden"
+                value="1"
+                id="input-showHidden"
+                <?php if ($showHidden) echo "checked" ?>
+              >
+              <label class="custom-control-label" for="input-showHidden">Voir les photos cachées</label>
+            </div>
+          <?php } // Fin if admin ?>
+          <select class="form-control" name="category" id="category">
+            <option value="all" class="form-control">Toutes les photos</option>
+            <?php
+                $categories = getAllCategories($_SESSION["connection"]);
+                foreach($categories as $category)
+                {
+                  // Si la catégorie a été séléctionée, l'afficher comme telle
+                  if (!is_null($_GET["category"]) && $_GET["category"] == $category["catId"])
+                    echo "<option value=" . strval($category["catId"]) . " selected>" . $category["nomCat"] . "</option>\n";
+                  else
+                    echo "<option value=" . strval($category["catId"]) . ">" . $category["nomCat"] . "</option>\n";
+                }
+            ?>
+          </select>
+          <button type="submit" class="btn btn-primary">
+            Filtrer
+          </button>
+        </div>
+      </form>
+    </div> <!-- container -->
     <?php
         //On récupère les images à afficher
         if (!array_key_exists("category", $_GET) || $_GET["category"] == "all")
-          $images = getAllVisibleImages($_SESSION["connection"]);
+        {
+          if ($showHidden)
+            $images = getAllImages($_SESSION["connection"]);
+          else
+            $images = getAllVisibleImages($_SESSION["connection"]);
+        }
         else
-          $images = getVisibleImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
-        
+        {
+          if ($showHidden)
+            $images = getImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
+          else
+            $images = getVisibleImagesFromCategoryID($_SESSION["connection"], $_GET["category"]);
+        }
         echo generateImageGallery($images);
 
     ?>
