@@ -103,7 +103,11 @@ function generateImageGallery($images)
     $number_of_images = count($images);
     $gallery .= "<div class=\"img-gallery\">";
     foreach($images as $index => $image)
-      $gallery .= "<a href='./photo_details.php?photoId=" . strval($image["photoId"]) . "'><img src='img/" . $image["nomFich"] . "'></a>\n";
+    {
+      $gallery .= "<a href='./photo_details.php?photoId=" . strval($image["photoId"]) . "'><img";
+      if($image["hidden"]) $gallery .= " class=\"hidden-image\"";
+      $gallery .=" src='img/" . $image["nomFich"] . "'></a>\n";
+    }
     $gallery .= "</div>\n";
     return $gallery;
 }
