@@ -45,6 +45,7 @@
           $_SESSION["logged"] = true;
           $_SESSION["username"] = $_POST["username"];
           $_SESSION["admin"] = false;
+          $_SESSION["logged_at"] = time();
 
           header("Location: ./index.php");
           exit;
