@@ -5,16 +5,11 @@
   require_once("./func/interface_generation.php");
   $_SESSION["connection"] = getConnection("localhost", "root", "", "images");
 
+  // Autoriser à afficher les images cachées
   // Si le champ showHidden est vrai
-  if (isset($_GET["showHidden"]) && $_GET["showHidden"])
-  {
-    // Et si l'utilisateur est administrateur
-    if (isset($_SESSION["admin"]) && $_SESSION["admin"])
-    {
-      // Autoriser à afficher les images cachées
-      $showHidden = true;
-    }
-  }
+  $showHidden = isset($_GET["showHidden"]) && $_GET["showHidden"]
+  // Et si l'utilisateur est administrateur
+             && isset($_SESSION["admin"]) && $_SESSION["admin"];
 ?>
 
 <!doctype html>
