@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 07 mai 2021 à 10:40
+-- Généré le : ven. 07 mai 2021 à 12:48
 -- Version du serveur :  10.4.18-MariaDB
 -- Version de PHP : 8.0.3
 
@@ -116,9 +116,9 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`pseudo`, `passwordHash`, `admin`) VALUES
-('admin', '$2y$10$dCig0vdT1jmhKC8V95i6w.UvfZuXAxH0zonPdSoF3vzJN5ZUSBXF2', 1),
+('admin', '$2y$10$8xrAXa.XgvNY2zeKK3qsjOGDhKQ5UWBQi8BM5UIZn82qw4qAU5Nc.', 1),
 ('Eggman', '$2y$10$gM/hmHBQB.90sPYozzTLv.LTsWCMfC7Gpc.VCSHG2X64yreEyJtv6', 0),
-('Félix', '$2y$10$JPbGlh1uAjte1oGlEF5hheZFnGUVgnRPB9dhavikLjDrFTvd0pFda', 0);
+('Félix', '$2y$10$YwDn.n271hh5VA423Qq/vO105Q1oialeIdE0BQb1opiJGrK6vfHxG', 0);
 
 --
 -- Index pour les tables déchargées
