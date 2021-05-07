@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 04 mai 2021 à 16:51
+-- Généré le : ven. 07 mai 2021 à 10:40
 -- Version du serveur :  10.4.18-MariaDB
 -- Version de PHP : 8.0.3
 
@@ -89,7 +89,6 @@ INSERT INTO `Photo` (`photoId`, `nomFich`, `description`, `catId`, `auteur`, `hi
 (59, 'DSC59.png', 'Hornet, un personnage du jeu Hollow Knight', 4, 'Eggman', 0),
 (60, 'DSC60.png', 'Un pacman en 3D coincé par un fantôme rouge', 4, 'Eggman', 0),
 (61, 'DSC61.png', 'Deux étoiles avec des visages sourient', 12, 'Eggman', 0),
-(62, 'DSC62.png', 'Dromadaire habillé en Rick Astley', 6, 'admin', 0),
 (63, 'DSC63.png', 'Un squelette essayant de boire', 3, 'admin', 0),
 (64, 'DSC64.png', 'Un squelette travaillant en tant que serveur', 3, 'admin', 1),
 (65, 'DSC65.png', 'Un squelette agacé de recevoir des os sur le crâne', 3, 'admin', 0),
@@ -97,7 +96,8 @@ INSERT INTO `Photo` (`photoId`, `nomFich`, `description`, `catId`, `auteur`, `hi
 (67, 'DSC67.png', 'Un bateau-taco', 2, 'Eggman', 0),
 (68, 'DSC68.png', 'Un bateau volant, traversant les nuages', 2, 'Eggman', 0),
 (69, 'DSC69.gif', 'Kirbo, un personnage de TerminalMontage, triste', 4, 'admin', 0),
-(70, 'DSC70.png', 'Beaucoup (trop) de souris', 6, 'Eggman', 0);
+(70, 'DSC70.png', 'Beaucoup (trop) de souris', 6, 'Eggman', 0),
+(73, 'DSC73.png', 'Un dromadaire habillé en Rick Astley', 6, 'admin', 0);
 
 -- --------------------------------------------------------
 
@@ -159,7 +159,7 @@ ALTER TABLE `Categorie`
 -- AUTO_INCREMENT pour la table `Photo`
 --
 ALTER TABLE `Photo`
-  MODIFY `photoId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'L''identifiant de la photo', AUTO_INCREMENT=73;
+  MODIFY `photoId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'L''identifiant de la photo', AUTO_INCREMENT=74;
 
 --
 -- Contraintes pour les tables déchargées
