@@ -1,4 +1,7 @@
 # MiniPinterest
+
+![MiniPinterest](./img/DSC39.png)
+
 Un projet utilisant php et phpMyAdmin pour gérer une plateforme de publication d'image avec une gestion de comptes utilisateurs
 
 Ce projet a été effectué début 2021 dans le cadre de l'UE "Bases de données web" en L2.
