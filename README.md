@@ -1,6 +1,6 @@
 # MiniPinterest
 
-![MiniPinterest](./img/DSC39.png)
+![MiniPinterest](./img/demo.png)
 
 Un projet utilisant php et phpMyAdmin pour gérer une plateforme de publication d'image avec une gestion de comptes utilisateurs
 
